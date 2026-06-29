@@ -1,4 +1,7 @@
 package com.gitlite.exception;
 
-public class GitLiteException {
+import java.util.Scanner;
+
+public class GitLiteException  {
+
 }
