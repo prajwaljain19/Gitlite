@@ -1,5 +1,6 @@
 package com.gitlite;
 
+import com.gitlite.command.AddCommand;
 import com.gitlite.command.InitCommand;
 
 import java.util.Scanner;
@@ -18,20 +19,29 @@ public class Main {
 
             System.out.print("GitLite > ");
 
-            String command = scanner.nextLine().trim();
+            String input = scanner.nextLine().trim();
 
-            if (command.equalsIgnoreCase("exit")) {
+            if (input.equalsIgnoreCase("exit")) {
                 System.out.println("Goodbye!");
                 break;
             }
 
-            if (command.equalsIgnoreCase("init")) {
+             String[] tokens = input.split(" ");
+            String command = tokens[0];
 
-                InitCommand initCommand = new InitCommand();
-                initCommand.execute();
+            switch (command.toLowerCase()) {
+                case "init" :
+                    new InitCommand().execute();
+                    break;
+                case "add":
+                    if(tokens.length < 2) {
+                        System.out.println("Usage: add<filename>");
+                        break;
+                    }
+                    new AddCommand().execute(tokens[1]);
+                    break;
 
-            } else {
-
+                default:
                 System.out.println("Unknown Command");
 
             }
